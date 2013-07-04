@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+
+    "name": "Tiny Tiny RSS Open in Background Tab",
+    "version": "0.1",
+    "description": "Open Tiny Tiny RSS links in a background tab using a shortcut key.",
+
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "background.js"
+        ]
+    },
+
+    "content_scripts": [
+        {
+            "matches": [ "<all_urls>" ],
+            "js": [ "handler.js" ]
+        }
+    ],
+
+    "permissions": [
+        "storage",
+        "activeTab"
+    ]
+}

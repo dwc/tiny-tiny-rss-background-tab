@@ -19,6 +19,8 @@
         }
     ],
 
+    "options_page": "assets/options.html",
+
     "permissions": [
         "storage",
         "activeTab"

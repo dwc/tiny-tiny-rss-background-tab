@@ -1,9 +1,9 @@
 (function() {
     var Handler = function() {
         var options = {
-            urlPatterns: [ "http://feeds.danieltwc.com" ],
-            shortcutKey: "V".charCodeAt(0),
-            linkSelector: ".Selected .hlTitle .hlContent a"
+            urlPatterns: [],
+            shortcutKey: null,
+            linkSelector: null
         };
 
         this.init = function() {

@@ -1,0 +1,38 @@
+body {
+    font-family: sans-serif;
+}
+
+fieldset {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 1.3em;
+}
+
+fieldset legend {
+    font-weight: bold;
+    font-size: 1.3em;
+    padding-top: 1em;
+}
+
+fieldset input[type="text"], fieldset select {
+    width: 30%;
+}
+
+fieldset input#shortcutKey {
+    width: 10%;
+}
+
+fieldset em {
+    font-size: 0.8em;
+}
+
+button#save {
+    margin: 1em;
+}
+
+#status {
+    background: #eee;
+    border: 1px solid #ddd;
+    display: none;
+    padding: 0.25em;
+}

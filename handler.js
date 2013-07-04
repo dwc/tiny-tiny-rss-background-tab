@@ -6,23 +6,32 @@
             linkSelector: null
         };
 
-        this.init = function() {
+        var window;
+        var enabled = false;
+
+        this.init = function(obj) {
+            window = obj;
+
             var keys = Object.keys(options);
 
             chrome.storage.sync.get(keys, function(saved) {
-                for (var key in keys) {
+                for (var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
                     if (saved[key]) {
                         options[key] = saved[key];
                     }
                 }
-            });
 
-            console.log("options", options);
+                optionsLoaded();
+            });
         };
 
-        this.enabled = function() {
-            var enabled = false;
 
+        this.enabled = function() {
+            return enabled;
+        }
+
+        var optionsLoaded = function() {
             if (options.urlPatterns.length > 0) {
                 var r = new RegExp("^(" + options.urlPatterns.join("|") + ")", "i");
                 if (r.test(window.location.href)) {
@@ -30,10 +39,12 @@
                 }
             }
 
-            return enabled;
-        }
+            if (enabled) {
+                window.addEventListener("keypress", handleKeypress, false);
+            }
+        };
 
-        this.handleKeypress = function(e) {
+        var handleKeypress = function(e) {
             var tag = e.target.tagName.toLowerCase();
 
             if (tag === 'input' || tag === 'textarea') {
@@ -56,10 +67,6 @@
 
     if (window === top) {
         var handler = new Handler();
-        handler.init();
-
-        if (handler.enabled()) {
-            window.addEventListener("keypress", handler.handleKeypress, false);
-        }
+        handler.init(window);
     }
 })();

@@ -2,7 +2,7 @@ var TTBgOptions = function() {
     var defaults = {
         urlPatterns: [ "http://feeds.danieltwc.com" ],
         shortcutKey: "V".charCodeAt(0),
-        linkSelector: ".Selected .hlTitle .hlContent a"
+        linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title"
     };
 
     this.restore = function() {

@@ -12,18 +12,18 @@
     "background": {
         "persistent": false,
         "scripts": [
-            "background.js"
+            "assets/js/background.js"
         ]
     },
 
     "content_scripts": [
         {
             "matches": [ "<all_urls>" ],
-            "js": [ "handler.js" ]
+            "js": [ "assets/js/handler.js" ]
         }
     ],
 
-    "options_page": "assets/options.html",
+    "options_page": "options.html",
 
     "permissions": [
         "storage",

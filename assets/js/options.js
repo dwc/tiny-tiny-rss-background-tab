@@ -1,6 +1,6 @@
 var TTBgOptions = function() {
     var defaults = {
-        urlPatterns: [ "http://feeds.danieltwc.com" ],
+        urlPatterns: [],
         shortcutKey: "V".charCodeAt(0),
         linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title"
     };

@@ -2,7 +2,7 @@ var TTBgOptions = function() {
     var defaults = {
         urlPatterns: [],
         shortcutKey: "V".charCodeAt(0),
-        linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title"
+        linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title, #headlines-frame .active a.title"
     };
 
     this.restore = function() {

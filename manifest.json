@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Tiny Tiny RSS Open in Background Tab",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Open Tiny Tiny RSS links in a background tab using a shortcut key.",
     "icons": {
         "48": "assets/img/icon48.png",

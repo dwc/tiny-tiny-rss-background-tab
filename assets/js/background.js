@@ -1,4 +1,4 @@
-chrome.extension.onMessage.addListener(
+chrome.runtime.onMessage.addListener(
     function(msg) {
         chrome.tabs.create({
             url: msg.url,

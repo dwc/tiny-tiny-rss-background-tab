@@ -59,7 +59,7 @@
                 var a = document.querySelector(options.linkSelector);
 
                 if (a) {
-                    chrome.extension.sendMessage({ url: a.href });
+                    chrome.runtime.sendMessage({ url: a.href });
                 }
             }
         };

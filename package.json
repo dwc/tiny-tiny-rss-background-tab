@@ -1,0 +1,41 @@
+{
+  "name": "tiny-tiny-rss-background-tab",
+  "version": "0.0.4",
+  "description": "Browser extension for opening Tiny Tiny RSS links in a background tab using a shortcut key",
+  "scripts": {
+    "build": "gulp",
+    "clean": "gulp clean",
+    "test": "mocha --compilers js:babel-core/register",
+    "start-firefox": "web-ext run -s dist/ --target firefox-desktop --start-url about:debugging --start-url about:addons --verbose",
+    "start-chrome": "web-ext run -s dist/ --target chromium --verbose",
+    "lint": "web-ext lint -s dist/",
+    "pack": "web-ext build -s dist/",
+    "sign": "web-ext sign -s dist/"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/stream": "^3.0.1",
+    "del": "^8.0.0",
+    "gulp": "^5.0.0",
+    "mocha": "^11.1.0",
+    "vinyl-source-stream": "^2.0.0",
+    "web-ext": "^8.3.0",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwc/tiny-tiny-rss-background-tab.git"
+  },
+  "author": "Daniel Westermann-Clark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwc/tiny-tiny-rss-background-tab/issues"
+  },
+  "homepage": "https://github.com/dwc/tiny-tiny-rss-background-tab#readme"
+}

@@ -1,117 +1,114 @@
-var TTBgOptions = function() {
-    var defaults = {
-        urlPatterns: [],
-        shortcutKey: "V".charCodeAt(0),
-        linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title, #headlines-frame .active a.title"
-    };
+const browser = require('webextension-polyfill');
 
-    this.restore = function() {
-        chrome.storage.sync.get(Object.keys(defaults), function(saved) {
-            var urlPatterns = saved["urlPatterns"] || defaults["urlPatterns"];
-            if (urlPatterns instanceof Array) {
-                for (var i = 0; i < urlPatterns.length; i++) {
-                    addUrlPatternOption(urlPatterns[i]);
-                }
-            }
+const defaults = {
+    urlPatterns: [],
+    shortcutKey: "V".charCodeAt(0),
+    linkSelector: ".Selected .hlTitle .hlContent a, .Selected .cdmHeader a.title, #headlines-frame .active a.title"
+}
 
-            var shortcutKey = saved["shortcutKey"] || defaults["shortcutKey"];
-            if (shortcutKey) {
-                document.querySelector("#shortcutKey").value = String.fromCharCode(shortcutKey);
-            }
+async function restoreOptions() {
+    let saved = await browser.storage.sync.get(Object.keys(defaults));
 
-            var linkSelector = saved["linkSelector"] || defaults["linkSelector"];
-            if (linkSelector) {
-                document.querySelector("#linkSelector").value = linkSelector;
-            }
-        });
-    };
-
-    this.save = function() {
-        var options = {
-            urlPatterns: getUrlPatterns(),
-            shortcutKey: getShortcutKey(),
-            linkSelector: getLinkSelector()
-        };
-
-        chrome.storage.sync.set(options, function() {
-            showMessage("Settings saved!");
-        });
-    };
-
-    this.removeUrlPattern = function() {
-        var urlPatterns = document.querySelector("#urlPatterns");
-
-        while (urlPatterns.selectedIndex >= 0) {
-            urlPatterns.remove(urlPatterns.selectedIndex);
+    let urlPatterns = saved["urlPatterns"] || defaults["urlPatterns"];
+    if (urlPatterns instanceof Array) {
+        for (let i = 0; i < urlPatterns.length; i++) {
+            addUrlPatternOption(urlPatterns[i]);
         }
+    }
+
+    let shortcutKey = saved["shortcutKey"] || defaults["shortcutKey"];
+    if (shortcutKey) {
+        document.querySelector("#shortcutKey").value = String.fromCharCode(shortcutKey);
+    }
+
+    let linkSelector = saved["linkSelector"] || defaults["linkSelector"];
+    if (linkSelector) {
+        document.querySelector("#linkSelector").value = linkSelector;
+    }
+}
+
+function saveOptions() {
+    const options = {
+        urlPatterns: getUrlPatterns(),
+        shortcutKey: getShortcutKey(),
+        linkSelector: getLinkSelector()
     };
 
-    this.addUrlPattern = function() {
-        var urlPattern = document.querySelector("#urlPattern").value;
-        addUrlPatternOption(urlPattern);
-    };
+    browser.storage.sync.set(options).then(() => {
+        showMessage("Settings saved!");
+    });
+}
 
-    var addUrlPatternOption = function(urlPattern) {
-        var opt = document.createElement("option");
-        opt.value = urlPattern;
-        opt.text = urlPattern;
+function removeUrlPattern() {
+    const urlPatterns = document.querySelector("#urlPatterns");
 
-        document.querySelector("#urlPatterns").add(opt);
-    };
-
-    var getUrlPatterns = function() {
-        var urlPatternOptions = document.querySelector("#urlPatterns").options;
-
-        var urlPatterns = [];
-        for (var i = 0; i < urlPatternOptions.length; i++) {
-            urlPatterns.push(urlPatternOptions[i].value);
-        }
-
-        return urlPatterns;
-    };
-
-    var getShortcutKey = function() {
-        var shortcutKeyChar = document.querySelector("#shortcutKey").value;
-
-        var shortcutKey;
-        if (shortcutKeyChar) {
-            shortcutKey = shortcutKeyChar.charCodeAt(0);
-        }
-
-        return shortcutKey;
-    };
-
-    var getLinkSelector = function() {
-        var linkSelector = document.querySelector("#linkSelector").value;
-
-        return linkSelector;
-    };
-
-    var showMessage = function(text) {
-        var status = document.querySelector("#status");
-        status.style.display = "block";
-
-        while (status.firstChild) {
-            status.removeChild(status.firstChild);
-        }
-
-        var p = document.createElement("p");
-        p.appendChild(document.createTextNode(text));
-        status.appendChild(p);
-
-        setTimeout(hideMessage, 5000);
-    };
-
-    var hideMessage = function() {
-        var status = document.querySelector("#status");
-        status.style.display = "none";
-    };
+    while (urlPatterns.selectedIndex >= 0) {
+        urlPatterns.remove(urlPatterns.selectedIndex);
+    }
 };
 
-var ttBgOptions = new TTBgOptions();
-document.addEventListener("DOMContentLoaded", ttBgOptions.restore);
+function addUrlPattern() {
+    const urlPattern = document.querySelector("#urlPattern").value;
+    addUrlPatternOption(urlPattern);
+}
 
-document.querySelector("#urlPatterns-remove").addEventListener("click", ttBgOptions.removeUrlPattern);
-document.querySelector("#urlPatterns-add").addEventListener("click", ttBgOptions.addUrlPattern);
+function addUrlPatternOption(urlPattern) {
+    const opt = document.createElement("option");
+    opt.value = urlPattern;
+    opt.text = urlPattern;
 
-document.querySelector("#save").addEventListener("click", ttBgOptions.save);
+    document.querySelector("#urlPatterns").add(opt);
+}
+
+function getUrlPatterns() {
+    const urlPatternOptions = document.querySelector("#urlPatterns").options;
+
+    const urlPatterns = [];
+    for (let i = 0; i < urlPatternOptions.length; i++) {
+        urlPatterns.push(urlPatternOptions[i].value);
+    }
+
+    return urlPatterns;
+}
+
+function getShortcutKey() {
+    const shortcutKeyChar = document.querySelector("#shortcutKey").value;
+
+    let shortcutKey;
+    if (shortcutKeyChar) {
+        shortcutKey = shortcutKeyChar.charCodeAt(0);
+    }
+
+    return shortcutKey;
+}
+
+function getLinkSelector() {
+    const linkSelector = document.querySelector("#linkSelector").value;
+
+    return linkSelector;
+}
+
+function showMessage(text) {
+    const status = document.querySelector("#status");
+    status.style.display = "block";
+
+    while (status.firstChild) {
+        status.removeChild(status.firstChild);
+    }
+
+    const p = document.createElement("p");
+    p.appendChild(document.createTextNode(text));
+    status.appendChild(p);
+
+    setTimeout(hideMessage, 5000);
+}
+
+function hideMessage() {
+    const status = document.querySelector("#status");
+    status.style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", restoreOptions);
+document.querySelector("#urlPatterns-remove").addEventListener("click", removeUrlPattern);
+document.querySelector("#urlPatterns-add").addEventListener("click", addUrlPattern);
+document.querySelector("#save").addEventListener("click", saveOptions);

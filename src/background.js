@@ -1,8 +1,8 @@
-chrome.runtime.onMessage.addListener(
-    function(msg) {
-        chrome.tabs.create({
-            url: msg.url,
-            active: false
-        });
-    }
-);
+const browser = require('webextension-polyfill');
+
+browser.runtime.onMessage.addListener((msg) => {
+    browser.tabs.create({
+        url: msg.url,
+        active: false
+    });
+});

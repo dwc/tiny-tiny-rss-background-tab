@@ -1,72 +1,60 @@
-(function() {
-    var Handler = function() {
-        var options = {
-            urlPatterns: [],
-            shortcutKey: null,
-            linkSelector: null
-        };
+const browser = require('webextension-polyfill');
 
-        var window;
-        var enabled = false;
+const options = {
+    urlPatterns: [],
+    shortcutKey: null,
+    linkSelector: null
+};
 
-        this.init = function(obj) {
-            window = obj;
+let enabled = false;
 
-            var keys = Object.keys(options);
+function init() {
+    const keys = Object.keys(options);
 
-            chrome.storage.sync.get(keys, function(saved) {
-                for (var i = 0; i < keys.length; i++) {
-                    var key = keys[i];
-                    if (saved[key]) {
-                        options[key] = saved[key];
-                    }
-                }
-
-                optionsLoaded();
-            });
-        };
-
-
-        this.enabled = function() {
-            return enabled;
+    browser.storage.sync.get(keys).then((saved) => {
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            if (saved[key]) {
+                options[key] = saved[key];
+            }
         }
 
-        var optionsLoaded = function() {
-            if (options.urlPatterns.length > 0) {
-                var r = new RegExp("^(" + options.urlPatterns.join("|") + ")", "i");
-                if (r.test(window.location.href)) {
-                    enabled = true;
-                }
-            }
+        optionsLoaded();
+    });
+}
 
-            if (enabled) {
-                window.addEventListener("keypress", handleKeypress, false);
-            }
-        };
+function optionsLoaded() {
+    if (options.urlPatterns.length > 0) {
+        const r = new RegExp("^(" + options.urlPatterns.join("|") + ")", "i");
 
-        var handleKeypress = function(e) {
-            var tag = e.target.tagName.toLowerCase();
-
-            if (tag === 'input' || tag === 'textarea') {
-                return;
-            }
-
-            if (e.altKey || e.ctrlKey) {
-                return;
-            }
-
-            if (e.keyCode === options.shortcutKey) {
-                var a = document.querySelector(options.linkSelector);
-
-                if (a) {
-                    chrome.runtime.sendMessage({ url: a.href });
-                }
-            }
-        };
+        if (r.test(window.location.href)) {
+            enabled = true;
+        }
     }
 
-    if (window === top) {
-        var handler = new Handler();
-        handler.init(window);
+    if (enabled) {
+        window.addEventListener("keypress", handleKeypress, false);
     }
-})();
+}
+
+function handleKeypress(e) {
+    const tag = e.target.tagName.toLowerCase();
+
+    if (tag === 'input' || tag === 'textarea') {
+        return;
+    }
+
+    if (e.altKey || e.ctrlKey) {
+        return;
+    }
+
+    if (e.keyCode === options.shortcutKey) {
+        const anchor = document.querySelector(options.linkSelector);
+
+        if (anchor) {
+            browser.runtime.sendMessage({ url: anchor.href });
+        }
+    }
+}
+
+init();

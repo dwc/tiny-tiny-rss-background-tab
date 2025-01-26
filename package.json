@@ -5,28 +5,24 @@
   "scripts": {
     "build": "gulp",
     "clean": "gulp clean",
-    "test": "mocha --compilers js:babel-core/register",
-    "start-firefox": "web-ext run -s dist/ --target firefox-desktop --start-url about:debugging --start-url about:addons --verbose",
-    "start-chrome": "web-ext run -s dist/ --target chromium --verbose",
-    "lint": "web-ext lint -s dist/",
-    "pack": "web-ext build -s dist/",
-    "sign": "web-ext sign -s dist/"
+    "lint": "web-ext lint -s dist/firefox/",
+    "pack": "npm run pack-chrome && npm run pack-firefox",
+    "start-chrome": "web-ext run --verbose --source-dir dist/chrome/ --target chromium",
+    "start-firefox": "web-ext run --verbose --source-dir dist/firefox/ --target firefox-desktop --start-url about:debugging --start-url about:addons",
+    "pack-chrome": "web-ext build --source-dir dist/chrome/ --artifacts-dir web-ext-artifacts/chrome/ --overwrite-dest",
+    "pack-firefox": "web-ext build --source-dir dist/firefox/ --artifacts-dir web-ext-artifacts/firefox/ --overwrite-dest",
+    "sign-firefox": "web-ext sign --source-dir dist/firefox/"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/stream": "^3.0.1",
+    "convert-manifest-format": "^0.6.0",
     "del": "^8.0.0",
     "gulp": "^5.0.0",
-    "mocha": "^11.1.0",
     "vinyl-source-stream": "^2.0.0",
     "web-ext": "^8.3.0",
     "webextension-polyfill": "^0.12.0"
-  },
-  "babel": {
-    "plugins": [
-      "transform-es2015-modules-commonjs"
-    ]
   },
   "repository": {
     "type": "git",

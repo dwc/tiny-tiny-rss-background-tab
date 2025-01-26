@@ -3,14 +3,15 @@
 
     "name": "Tiny Tiny RSS Open in Background Tab",
     "version": "0.0.4",
-    "description": "Open Tiny Tiny RSS links in a background tab using a shortcut key.",
+    "description": "Open Tiny Tiny RSS links in a background tab using a shortcut key",
     "icons": {
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
 
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "background.js",
+        "type": "module"
     },
 
     "content_scripts": [
@@ -20,9 +21,17 @@
         }
     ],
 
-    "options_page": "options/options.html",
+    "options_ui": {
+        "page": "options/options.html"
+    },
 
     "permissions": [
         "storage"
-    ]
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{CC167B37-8A37-4742-90C4-8A77FC8FF183}"
+        }
+    }
 }

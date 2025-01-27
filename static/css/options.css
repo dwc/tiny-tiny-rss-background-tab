@@ -2,37 +2,41 @@ body {
     font-family: sans-serif;
 }
 
-fieldset {
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    padding: 1.3em;
+form fieldset {
+    padding: 1.2em;
+    margin-bottom: 1em;
 }
 
-fieldset legend {
+form fieldset legend {
     font-weight: bold;
-    font-size: 1.3em;
-    padding-top: 1em;
+    font-size: 1.2em;
 }
 
-fieldset input[type="text"], fieldset select {
-    width: 30%;
+
+form fieldset input[type="text"], form fieldset select {
+    width: 80%;
 }
 
-fieldset input#shortcutKey {
+form fieldset select {
+    height: 4em;
+}
+
+form fieldset input#shortcutKey {
     width: 10%;
 }
 
-fieldset em {
-    font-size: 0.8em;
+form fieldset button#urlPatterns-add {
+    margin-bottom: 1em;
 }
 
-button#save {
+form fieldset em {
+    font-size: 0.9em;
+}
+
+form button#save {
     margin: 1em;
 }
 
 #status {
-    background: #eee;
-    border: 1px solid #ddd;
     display: none;
-    padding: 0.25em;
 }

@@ -90,15 +90,13 @@ function getLinkSelector() {
 
 function showMessage(text) {
     const status = document.querySelector("#status");
-    status.style.display = "block";
 
     while (status.firstChild) {
         status.removeChild(status.firstChild);
     }
 
-    const p = document.createElement("p");
-    p.appendChild(document.createTextNode(text));
-    status.appendChild(p);
+    status.appendChild(document.createTextNode(text));
+    status.style.display = "inline";
 
     setTimeout(hideMessage, 5000);
 }

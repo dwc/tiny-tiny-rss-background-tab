@@ -1,51 +1,55 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <title>Tiny Tiny RSS Background Tab options</title>
-    <link rel="stylesheet" type="text/css" href="../css/options.css">
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="stylesheet" type="text/css" href="../css/options.css" />
   </head>
   <body>
-    <fieldset>
-      <legend>URL Patterns</legend>
+    <form>
+      <fieldset>
+        <legend>URL Patterns</legend>
 
-      <input type="text" id="urlPattern" value="https://">
-      <button id="urlPatterns-add">Add</button>
-      <br>
+        <input type="text" id="urlPattern" value="https://" />
+        <button type="button" id="urlPatterns-add">Add</button>
+        <br />
 
-      <label for="urlPatterns">Current URL patterns:</label>
-      <br>
+        <label for="urlPatterns">Current URL patterns:</label>
+        <br />
 
-      <select multiple id="urlPatterns">
-      </select>
-      <br>
+        <select multiple id="urlPatterns">
+        </select>
+        <br />
 
-      <button id="urlPatterns-remove">Remove Selected</button>
-    </fieldset>
+        <button type="button" id="urlPatterns-remove">Remove Selected</button>
+      </fieldset>
 
-    <fieldset>
-      <legend>Shortcut Key</legend>
+      <fieldset>
+        <legend>Shortcut Key</legend>
 
-      <label for="shortcutKey">Current shortcut key:</label>
-      <br>
+        <label for="shortcutKey">Current shortcut key:</label>
+        <br />
 
-      <input type="text" id="shortcutKey" value="" maxlength="1">
-      <br>
-      <em>Case-sensitive. Enter one character, e.g. <code>v</code> to use the V key or <code>V</code> to use shift-V.</em>
-    </fieldset>
+        <input type="text" id="shortcutKey" value="" maxlength="1" />
+        <br />
+        <em>Case-sensitive. Enter one character, e.g. <code>v</code> to use the V key or <code>V</code> to use shift-V.</em>
+      </fieldset>
 
-    <fieldset>
-      <legend>Link Selector</legend>
+      <fieldset>
+        <legend>Link Selector</legend>
 
-      <label for="linkSelector">Current link selector:</label>
-      <br>
+        <label for="linkSelector">Current link selector:</label>
+        <br />
 
-      <input type="text" id="linkSelector" value="">
-      <br>
-      <em>The CSS selector matching the link of the current item.</em>
-    </fieldset>
+        <input type="text" id="linkSelector" value="" />
+        <br />
+        <em>The CSS selector matching the link of the current item.</em>
+      </fieldset>
 
-    <button id="save">Save Options</button>
-    <div id="status"></div>
+      <button type="button" id="save">Save Options</button>
+      <span id="status"></span>
+    </form>
 
     <script src="../options.js"></script>
   </body>

@@ -10,8 +10,8 @@ This browser extension lets you configure a shortcut key to open items in a back
 
 I have tested this extension in Google Chrome and Mozilla Firefox. You can install the extension from each browser's add-on website.
 
-* Chrome: https://chromewebstore.google.com/detail/tiny-tiny-rss-open-in-bac/ogckdilemlmpgijdkfophmckcddaeeaa
-* Firefox: https://addons.mozilla.org/en-US/firefox/addon/tt-rss-open-in-background-tab/
+* [Chrome](https://chromewebstore.google.com/detail/tiny-tiny-rss-open-in-bac/ogckdilemlmpgijdkfophmckcddaeeaa)
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tt-rss-open-in-background-tab/)
 
 Note that the extension uses the [`sync` storage area](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync) to store settings. You must enable synchronization of "Extensions" in Chrome or "Add-ons" in Firefox to configure and use this extension.
 

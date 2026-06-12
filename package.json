@@ -13,6 +13,9 @@
     "pack-firefox": "web-ext build --source-dir dist/firefox/ --artifacts-dir web-ext-artifacts/firefox/ --overwrite-dest",
     "sign-firefox": "web-ext sign --source-dir dist/firefox/"
   },
+  "allowScripts": {
+    "fsevents@2.3.3": true
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",
